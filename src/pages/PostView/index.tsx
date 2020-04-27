@@ -3,7 +3,6 @@ import firebase from '../../services/firebase';
 import history from '../../services/history';
 import { useParams } from 'react-router-dom';
 import { Post, PostOwner } from '../../types';
-import { MdSentimentNeutral, MdMail } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -11,19 +10,19 @@ import Loader from '../../components/Loader';
 import Helmet from '../../components/Helmet';
 import DisqusCommentsComponent from '../../components/DisqusComments';
 import { PostWrapper } from './styles';
+import { FiTwitter, FiCalendar as Calendar, FiFacebook } from 'react-icons/fi';
+import { MdSentimentNeutral } from 'react-icons/md';
 import {
-    FaTwitter,
-    FaFacebookF,
-    FaWhatsapp,
-    FaRedditAlien,
-    FaRegCalendarAlt as Calendar
-} from 'react-icons/fa';
+    AiOutlineReddit,
+    AiOutlineWhatsApp,
+    AiOutlineMail,
+} from 'react-icons/ai';
 import {
     FacebookShareButton,
     TwitterShareButton,
     WhatsappShareButton,
     EmailShareButton,
-    RedditShareButton
+    RedditShareButton,
 } from 'react-share';
 
 const avatarPlaceholder =
@@ -83,7 +82,7 @@ const PostViewComponent: React.FC = () => {
             .collection('posts')
             .doc(postId)
             .update({
-                views: viewsNumber + 1
+                views: viewsNumber + 1,
             })
             .then(() => {})
             .catch(() =>
@@ -108,9 +107,9 @@ const PostViewComponent: React.FC = () => {
     }
 
     const getPostDate = () =>
-        `${new Date(post?.createdAt).getDate()}/${new Date(
-            post?.createdAt
-        ).getMonth() + 1}/${new Date(post?.createdAt).getFullYear()}`;
+        `${new Date(post?.createdAt).getDate()}/${
+            new Date(post?.createdAt).getMonth() + 1
+        }/${new Date(post?.createdAt).getFullYear()}`;
 
     return (
         <>
@@ -147,10 +146,10 @@ const PostViewComponent: React.FC = () => {
 
                         <article className="post-content-wrapper container">
                             <div className="post-tags">
-                                {post.tags?.map(tagTitle => (
+                                {post.tags?.map((tagTitle) => (
                                     <span
                                         key={Math.round(Math.random() * 1000)}
-                                        onClick={event => {
+                                        onClick={(event) => {
                                             history.push(`/tags/${tagTitle}`);
                                         }}
                                         className="tag"
@@ -167,7 +166,7 @@ const PostViewComponent: React.FC = () => {
                             <div
                                 className="post-content"
                                 dangerouslySetInnerHTML={{
-                                    __html: post.content
+                                    __html: post.content,
                                 }}
                             />
 
@@ -179,14 +178,14 @@ const PostViewComponent: React.FC = () => {
                                         url={window.location.href}
                                         title={post.title}
                                     >
-                                        <FaTwitter size={30} className="icon" />
+                                        <FiTwitter size={30} className="icon" />
                                     </TwitterShareButton>
 
                                     <FacebookShareButton
                                         url={window.location.href}
                                         quote={post.title}
                                     >
-                                        <FaFacebookF
+                                        <FiFacebook
                                             className="icon"
                                             size={30}
                                         />
@@ -197,7 +196,7 @@ const PostViewComponent: React.FC = () => {
                                         separator={' '}
                                         url={window.location.href}
                                     >
-                                        <FaWhatsapp
+                                        <AiOutlineWhatsApp
                                             className="icon"
                                             size={30}
                                         />
@@ -209,14 +208,17 @@ const PostViewComponent: React.FC = () => {
                                         body={post.description}
                                         separator=" "
                                     >
-                                        <MdMail className="icon" size={30} />
+                                        <AiOutlineMail
+                                            className="icon"
+                                            size={30}
+                                        />
                                     </EmailShareButton>
 
                                     <RedditShareButton
                                         title={post.title}
                                         url={window.location.href}
                                     >
-                                        <FaRedditAlien
+                                        <AiOutlineReddit
                                             className="icon"
                                             size={30}
                                         />
@@ -247,7 +249,7 @@ const PostViewComponent: React.FC = () => {
                                                 target="__blank"
                                                 href={`https://twitter.com/${postOwner?.twitter}`}
                                             >
-                                                <FaTwitter
+                                                <FiTwitter
                                                     className="icon"
                                                     size={25}
                                                 />

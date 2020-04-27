@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
-import { FaRegCopyright, FaTwitter, FaUserAlt } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
+
+import { FiUser, FiAtSign, FiTwitter } from 'react-icons/fi';
+
 import goldLogoSaints from '../../assets/images/logo.svg';
 import history from '../../services/history';
 import { Wrapper } from './styles';
@@ -12,14 +13,13 @@ const FooterComponent: React.FC = () => (
                 src={goldLogoSaints}
                 alt="Saints logo"
                 title="Saints logo"
-                onClick={event => history.push('/')}
+                onClick={(event) => history.push('/')}
             />
         </div>
 
         <div className="content">
             <div className="about" style={{ color: '#444' }}>
-                Copyright <FaRegCopyright size={20} color={'#444'} /> 2019 -
-                Defensor do Saints
+                Copyright &copy; 2019 - Defensor do Saints
             </div>
 
             <div className="social-network-wrapper">
@@ -28,7 +28,7 @@ const FooterComponent: React.FC = () => (
                         target={'__blank'}
                         href="https://www.twitter.com/saintsbr1967"
                     >
-                        <FaTwitter color={'#444'} size={20} /> Twitter
+                        <FiTwitter color={'#444'} size={20} /> Twitter
                     </a>
                 </div>
                 <div className="social-network">
@@ -37,15 +37,15 @@ const FooterComponent: React.FC = () => (
                         href={'mailto:rodrigonoronha09@gmail.com'}
                         type="email"
                     >
-                        <MdEmail color={'#444'} size={20} /> E-mail
+                        <FiAtSign color={'#444'} size={20} /> E-mail
                     </a>
                 </div>
 
                 <div
                     className="social-network"
-                    onClick={event => history.push(`/signin`)}
+                    onClick={(event) => history.push(`/signin`)}
                 >
-                    <FaUserAlt color={'#444'} size={20} /> Admin
+                    <FiUser color={'#444'} size={20} /> Admin
                 </div>
             </div>
         </div>

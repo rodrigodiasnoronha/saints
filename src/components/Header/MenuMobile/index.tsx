@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../../contexts/Auth';
-import { FaSearch as SearchIcon } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import saintsLogo from '../../../assets/images/saints-gold-logo.png';
 import history from '../../../services/history';
@@ -8,11 +7,12 @@ import { Form } from '@unform/web';
 import Input from '../../Input';
 import { Wrapper } from './styles';
 import {
-    MdMenu as MenuMobileIcon,
-    MdClear as CloseMenuMobileIcon,
-    MdPerson,
-    MdSubdirectoryArrowLeft,
-} from 'react-icons/md';
+    FiSearch as SearchIcon,
+    FiUser,
+    FiCornerDownLeft,
+    FiX as CloseMenuMobileIcon,
+    FiMenu as MenuMobileIcon,
+} from 'react-icons/fi';
 
 interface Props {
     signed: boolean;
@@ -109,7 +109,7 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
                     {signed && (
                         <>
                             <Link className="menu-mobile-item" to="/provider">
-                                <MdPerson color="#3f464c" size={28} />
+                                <FiUser color="#3f464c" size={28} />
                                 Administrador
                             </Link>
 
@@ -117,10 +117,7 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
                                 onClick={logOutHandler}
                                 className="menu-mobile-item"
                             >
-                                <MdSubdirectoryArrowLeft
-                                    size={28}
-                                    color="#c62828"
-                                />
+                                <FiCornerDownLeft size={28} color="#c62828" />
                                 Sair
                             </div>
                         </>

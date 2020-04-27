@@ -2,7 +2,7 @@ import React from 'react';
 import history from '../../../services/history';
 import Input from '../../Input';
 import { Wrapper } from './styles';
-import { FaSearch as SearchIcon } from 'react-icons/fa';
+import { FiSearch as SearchIcon } from 'react-icons/fi';
 
 interface FormData {
     query: string;
