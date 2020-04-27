@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import AuthContext from '../../../contexts/Auth';
+import React, { useState } from 'react';
+import { useAuth } from '../../../contexts/Auth';
 import { Link } from 'react-router-dom';
 import saintsLogo from '../../../assets/images/saints-gold-logo.png';
 import history from '../../../services/history';
@@ -25,7 +25,7 @@ interface FormData {
 const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
     const [hiddenMenuMobile, setHiddenMenuMobile] = useState<boolean>(true);
 
-    const { logOut } = useContext(AuthContext);
+    const { logOut } = useAuth();
 
     const handleSubmit = (data: FormData) => {
         const { query } = data;

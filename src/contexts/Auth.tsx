@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import firebase from '../services/firebase';
 import history from '../services/history';
 import { toast } from 'react-toastify';
@@ -7,6 +7,7 @@ interface Auth {
     signed: boolean;
     login(email: string, password: string): Promise<string | number | void>;
     logOut(): Promise<void>;
+    resetPassWithEmail(email: string): Promise<React.ReactText>;
 }
 
 const Context = createContext<Auth>({} as Auth);
@@ -73,11 +74,30 @@ export const AuthProvider: React.FC = ({ children }) => {
         localStorage.clear();
     };
 
+    const resetPassWithEmail = async (email: string) => {
+        if (!email.trim()) {
+            return toast.error('Digite um e-mail para resetar a senha');
+        }
+
+        try {
+            await firebase.auth().sendPasswordResetEmail(email);
+
+            return toast('Um email foi enviado para reset de senha');
+        } catch (error) {
+            return toast.error(
+                'Ocorreu um erro. Verifique seu e-mail e tente novamente'
+            );
+        }
+    };
+
     return (
-        <Context.Provider value={{ signed, login, logOut }}>
+        <Context.Provider value={{ signed, login, logOut, resetPassWithEmail }}>
             {children}
         </Context.Provider>
     );
 };
+
+// HOOKS
+export const useAuth = () => useContext(Context);
 
 export default Context;

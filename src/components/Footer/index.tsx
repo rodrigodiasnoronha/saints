@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
-
 import { FiUser, FiAtSign, FiTwitter } from 'react-icons/fi';
-
 import goldLogoSaints from '../../assets/images/logo.svg';
 import history from '../../services/history';
 import { Wrapper } from './styles';

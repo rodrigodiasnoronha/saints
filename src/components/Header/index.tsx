@@ -1,5 +1,5 @@
-import React, { memo, useContext } from 'react';
-import AuthContext from '../../contexts/Auth';
+import React, { memo } from 'react';
+import { useAuth } from '../../contexts/Auth';
 import saintsLogo from '../../assets/images/logo.svg';
 import MenuMobile from './MenuMobile';
 import MenuSocialMedia from './MenuSocialMedia';
@@ -8,7 +8,7 @@ import SearchBar from './SearchBar';
 import { Space, Title, Wrapper } from './styles';
 
 const HeaderComponent: React.FC = () => {
-    const { signed } = useContext(AuthContext);
+    const { signed } = useAuth();
 
     return (
         <Wrapper>
