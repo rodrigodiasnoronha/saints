@@ -1,4 +1,5 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useContext, useEffect, useState, memo } from 'react';
+import AuthContext from '../../contexts/Auth';
 import history from '../../services/history';
 import firebase from '../../services/firebase';
 import { FaKey, FaRegUser } from 'react-icons/fa';
@@ -17,14 +18,15 @@ const SignInComponent: React.FC = () => {
     const [resetPass, setResetPass] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
+    const { login } = useContext(AuthContext);
+
     useEffect(() => {
         document.title = 'Sign in | Defensor do Saints';
 
-        localStorage.removeItem('user');
-        localStorage.removeItem('user_id');
+        localStorage.clear();
     }, []);
 
-    firebase.auth().onAuthStateChanged(async user => {
+    firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
             await firebase.auth().signOut();
         }
@@ -37,49 +39,9 @@ const SignInComponent: React.FC = () => {
         if (resetPass) {
             await resetPassWithEmail(email);
         } else {
-            await signIn(email, password);
+            await login(email, password);
         }
         setLoading(false);
-    };
-
-    const signIn = async (email: string, password: string) => {
-        if (!email.trim() || !password?.trim()) {
-            return toast.error('Necessário preencher todos os campos');
-        }
-
-        return firebase
-            .auth()
-            .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(login);
-
-        async function login() {
-            return firebase
-                .auth()
-                .signInWithEmailAndPassword(email, password)
-                .then(signInCallbackSuccess)
-                .catch(signInCallbackError);
-        }
-
-        function signInCallbackSuccess(data: firebase.auth.UserCredential) {
-            localStorage.setItem('user', JSON.stringify(data.user));
-            localStorage.setItem('user_id', data.user.uid);
-            return history.push('/');
-        }
-
-        function signInCallbackError(error: firebase.auth.AuthError) {
-            switch (error.code) {
-                case 'auth/wrong-password':
-                    return toast.error('Sua senha está incorreta');
-
-                case 'auth/user-not-found':
-                    return toast.error(
-                        'Esse e-mail não pertence a nenhum usuário'
-                    );
-
-                default:
-                    return toast.error('Ocorreu um erro. Tente novamente');
-            }
-        }
     };
 
     const resetPassWithEmail = async (email: string) => {
@@ -139,7 +101,7 @@ const SignInComponent: React.FC = () => {
                             </button>
                             <p
                                 className="forgot-pass"
-                                onClick={event => setResetPass(true)}
+                                onClick={(event) => setResetPass(true)}
                             >
                                 Esqueceu a senha?
                             </p>
@@ -170,7 +132,7 @@ const SignInComponent: React.FC = () => {
                             </button>
                             <p
                                 className="forgot-pass"
-                                onClick={event => setResetPass(false)}
+                                onClick={(event) => setResetPass(false)}
                             >
                                 Já possui conta?
                             </p>

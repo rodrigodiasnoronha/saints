@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import firebase from '../../services/firebase';
+import React, { useContext, useState } from 'react';
+import AuthContext from '../../../contexts/Auth';
 import { FaSearch as SearchIcon } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import saintsLogo from '../../assets/images/saints-gold-logo.png';
-import history from '../../services/history';
+import saintsLogo from '../../../assets/images/saints-gold-logo.png';
+import history from '../../../services/history';
 import { Form } from '@unform/web';
-import Input from '../Input';
+import Input from '../../Input';
 import { Wrapper } from './styles';
 import {
     MdMenu as MenuMobileIcon,
     MdClear as CloseMenuMobileIcon,
     MdPerson,
-    MdSubdirectoryArrowLeft
+    MdSubdirectoryArrowLeft,
 } from 'react-icons/md';
 
 interface Props {
@@ -25,6 +25,8 @@ interface FormData {
 const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
     const [hiddenMenuMobile, setHiddenMenuMobile] = useState<boolean>(true);
 
+    const { logOut } = useContext(AuthContext);
+
     const handleSubmit = (data: FormData) => {
         const { query } = data;
 
@@ -37,10 +39,8 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
         window.location.reload();
     };
 
-    const logOut = async () => {
-        await firebase.auth().signOut();
-        localStorage.removeItem('user_id');
-        localStorage.removeItem('user');
+    const logOutHandler = async () => {
+        await logOut();
         history.push('/signin');
     };
 
@@ -57,7 +57,7 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
 
                         <div
                             className="menu-mobile-clear-menu"
-                            onClick={event =>
+                            onClick={(event) =>
                                 setHiddenMenuMobile(!hiddenMenuMobile)
                             }
                         >
@@ -113,7 +113,10 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
                                 Administrador
                             </Link>
 
-                            <div onClick={logOut} className="menu-mobile-item">
+                            <div
+                                onClick={logOutHandler}
+                                className="menu-mobile-item"
+                            >
                                 <MdSubdirectoryArrowLeft
                                     size={28}
                                     color="#c62828"
@@ -127,7 +130,7 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
 
             <button
                 className="menu-mobile-button"
-                onClick={event => setHiddenMenuMobile(!hiddenMenuMobile)}
+                onClick={(event) => setHiddenMenuMobile(!hiddenMenuMobile)}
             >
                 <MenuMobileIcon size={35} />
             </button>

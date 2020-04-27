@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthProvider } from './contexts/Auth';
 import GlobalStyles from './components/GlobalStyles';
 import Routes from './routes';
 import { ToastContainer } from 'react-toastify';
@@ -9,7 +10,9 @@ const App: React.FC = () => (
     <>
         <GlobalStyles />
         <ToastContainer autoClose={3000} />
-        <Routes />
+        <AuthProvider>
+            <Routes />
+        </AuthProvider>
     </>
 );
 

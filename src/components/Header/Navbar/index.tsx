@@ -10,7 +10,7 @@ const NavbarComponent: React.FC<Props> = ({ signed }) => {
     const [scrollPos, setScrollPos] = useState<number>(window.pageYOffset);
 
     useEffect(() => {
-        window.addEventListener('scroll', event => {
+        window.addEventListener('scroll', (event) => {
             const newScrollPos = window.pageYOffset;
             setScrollPos(newScrollPos);
         });

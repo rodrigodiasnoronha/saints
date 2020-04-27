@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import firebase from '../../services/firebase';
+import React, { useContext, useState } from 'react';
+import AuthContext from '../../contexts/Auth';
 import { MdMenu } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import saintsLogo from '../../assets/images/saints-gold-logo.png';
@@ -10,11 +10,12 @@ import { FaNewspaper, FaPencilAlt, FaUser } from 'react-icons/fa';
 const PainelComponent: React.FC = ({ children }) => {
     const [hideMenuMobile, setHiddeMenuMobile] = useState<boolean>(true);
 
-    async function handleLogOff() {
-        await firebase.auth().signOut();
-        localStorage.removeItem('user_id');
+    const { logOut } = useContext(AuthContext);
+
+    const handleLogOff = async () => {
+        await logOut();
         history.push('/signin');
-    }
+    };
 
     return (
         <Wrapper>
@@ -53,7 +54,7 @@ const PainelComponent: React.FC = ({ children }) => {
 
                 <div className="mobile">
                     <button
-                        onClick={event => setHiddeMenuMobile(!hideMenuMobile)}
+                        onClick={(event) => setHiddeMenuMobile(!hideMenuMobile)}
                         type="button"
                         className="mobile-button"
                     >

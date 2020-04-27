@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
-import firebase from '../../services/firebase';
+import React, { memo, useContext } from 'react';
+import AuthContext from '../../../contexts/Auth';
 import { FaTwitter } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import history from '../../services/history';
+import history from '../../../services/history';
 import { Wrapper } from './styles';
 
 interface Props {
@@ -10,11 +10,12 @@ interface Props {
 }
 
 const SocialMediaComponent: React.FC<Props> = ({ signed }) => {
-    async function handleLogOff() {
-        localStorage.removeItem('user_id');
-        await firebase.auth().signOut();
+    const { logOut } = useContext(AuthContext);
+
+    const logOutHandler = async () => {
+        await logOut();
         history.push('/signin');
-    }
+    };
 
     return (
         <Wrapper>
@@ -26,7 +27,7 @@ const SocialMediaComponent: React.FC<Props> = ({ signed }) => {
             </a>
             {signed && (
                 <div
-                    onClick={handleLogOff}
+                    onClick={logOutHandler}
                     style={{ marginLeft: 2, cursor: 'pointer' }}
                 >
                     SAIR
