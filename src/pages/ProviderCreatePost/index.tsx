@@ -3,10 +3,7 @@ import { Tag, Post } from '../../types';
 import history from '../../services/history';
 import firebase from '../../services/firebase';
 import { FormHandles } from '@unform/core';
-import ProviderPainel from '../../components/ProviderPainel';
-import Input from '../../components/Input';
-import TextAreaInput from '../../components/TextAreaInput';
-import Loader from '../../components/Loader';
+import { TextAreaInput, Input, ProviderPainel, Loader } from '../../components';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Content } from './styles';
@@ -100,7 +97,7 @@ const ProviderCreatePost: React.FC = () => {
 
             const arrayTags: Tag[] = new Array<Tag>();
 
-            data.forEach(doc => {
+            data.forEach((doc) => {
                 let tag = doc.data() as Tag;
                 tag.id = doc.id;
 
@@ -213,7 +210,7 @@ const ProviderCreatePost: React.FC = () => {
 
             const newTags = new Array<Tag>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 const item = doc.data() as Tag;
                 item.id = doc.id;
 
@@ -247,20 +244,17 @@ const ProviderCreatePost: React.FC = () => {
         }
 
         try {
-            await firebase
-                .firestore()
-                .collection('posts')
-                .add({
-                    title,
-                    description,
-                    content,
-                    alias,
-                    tags: postTags,
-                    imageUrl,
-                    views: 0,
-                    user_uid,
-                    createdAt
-                });
+            await firebase.firestore().collection('posts').add({
+                title,
+                description,
+                content,
+                alias,
+                tags: postTags,
+                imageUrl,
+                views: 0,
+                user_uid,
+                createdAt,
+            });
 
             toast('Post criado com successo');
             history.push(`/posts/${alias}`);
@@ -283,7 +277,7 @@ const ProviderCreatePost: React.FC = () => {
                     content,
                     alias,
                     tags: postTags,
-                    imageUrl
+                    imageUrl,
                 });
 
             history.push(`/posts/${data.alias}`);
@@ -373,7 +367,7 @@ const ProviderCreatePost: React.FC = () => {
                                             type="file"
                                             className="custom-file-input"
                                             id="post-image"
-                                            onChange={event =>
+                                            onChange={(event) =>
                                                 selectAnImageHandler(
                                                     event.target.files[0]
                                                 )
@@ -429,7 +423,7 @@ const ProviderCreatePost: React.FC = () => {
                                     <div className="tags-list">
                                         <h5>Tags</h5>
 
-                                        {tags?.map(tag => (
+                                        {tags?.map((tag) => (
                                             <div
                                                 key={tag.id}
                                                 className="custom-control custom-checkbox tags-wrapper"
@@ -441,7 +435,7 @@ const ProviderCreatePost: React.FC = () => {
                                                     checked={selectedTags.includes(
                                                         tag.title
                                                     )}
-                                                    onChange={event =>
+                                                    onChange={() =>
                                                         selectTagHandler(tag)
                                                     }
                                                     style={{ zIndex: 5 }}
@@ -457,7 +451,7 @@ const ProviderCreatePost: React.FC = () => {
                                                 <button
                                                     className="btn btn-sm btn-danger"
                                                     type="button"
-                                                    onClick={event =>
+                                                    onClick={() =>
                                                         deleteTagHandler(tag.id)
                                                     }
                                                 >

@@ -3,9 +3,11 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     display: flex;
     align-items: center;
+
     @media (min-width: 606px) {
         display: none;
     }
+
     .menu-mobile {
         position: absolute;
         left: 0;
@@ -20,15 +22,18 @@ export const Wrapper = styled.div`
             display: none;
         }
     }
+
     .menu-mobile-button {
         background: transparent;
         border: 2px solid transparent;
         color: var(--saints-gold-color);
         flex: 1;
+
         @media (max-width: 606px) {
             display: initial;
         }
     }
+
     .menu-mobile-logo-wrapper {
         display: flex;
         align-items: center;

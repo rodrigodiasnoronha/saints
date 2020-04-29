@@ -11,7 +11,7 @@ const FooterComponent: React.FC = () => (
                 src={goldLogoSaints}
                 alt="Saints logo"
                 title="Saints logo"
-                onClick={(event) => history.push('/')}
+                onClick={() => history.push('/')}
             />
         </div>
 
@@ -41,7 +41,7 @@ const FooterComponent: React.FC = () => (
 
                 <div
                     className="social-network"
-                    onClick={(event) => history.push(`/signin`)}
+                    onClick={() => history.push(`/signin`)}
                 >
                     <FiUser color={'#444'} size={20} /> Admin
                 </div>

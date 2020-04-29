@@ -3,10 +3,7 @@ import { Post } from '../../types';
 import firebase from '../../services/firebase';
 import { MdSentimentNeutral } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import Loader from '../../components/Loader';
-import Notice from '../../components/Notice';
+import { Notice, Loader, Header, Footer } from '../../components';
 import { Wrapper } from '../Tag/styles';
 import { FireSQL } from 'firesql';
 
@@ -49,7 +46,7 @@ const SearchComponent: React.FC = () => {
                 return 0;
             }
 
-            snapshot.forEach(doc => {
+            snapshot.forEach((doc) => {
                 doc.id = `${Date.now()}-${Math.round(Math.random() * 10000)}`;
                 arrayPosts.push(doc);
             });
@@ -78,7 +75,7 @@ const SearchComponent: React.FC = () => {
                             <h2>Resultado de: {urlParams.get('query')}</h2>
 
                             <div className="posts-grid">
-                                {posts?.map(post => (
+                                {posts?.map((post) => (
                                     <Notice key={post.id} data={post} />
                                 ))}
                             </div>

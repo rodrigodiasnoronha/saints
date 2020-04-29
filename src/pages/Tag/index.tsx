@@ -5,10 +5,7 @@ import { Post } from '../../types';
 import { MdSentimentNeutral } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import Loader from '../../components/Loader';
-import Notice from '../../components/Notice';
+import { Notice, Loader, Header, Footer } from '../../components';
 import { Wrapper } from './styles';
 
 const TagComponent: React.FC = () => {
@@ -52,7 +49,7 @@ const TagComponent: React.FC = () => {
 
             const arrayPosts: Post[] = new Array<Post>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 let item = doc.data() as Post;
                 item.id = doc.id;
 
@@ -89,7 +86,7 @@ const TagComponent: React.FC = () => {
                         </h2>
 
                         <div className="posts-grid">
-                            {posts?.map(post => (
+                            {posts?.map((post) => (
                                 <Notice key={post.id} data={post} />
                             ))}
                         </div>

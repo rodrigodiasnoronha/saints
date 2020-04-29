@@ -98,6 +98,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 };
 
 // HOOKS
-export const useAuth = () => useContext(Context);
+export function useAuth() {
+    return useContext(Context);
+}
 
 export default Context;

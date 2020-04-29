@@ -27,7 +27,7 @@ const ProviderComponent: React.FC = () => {
     }, []);
 
     const removePost = (postId: string) => {
-        const newArrayPosts = posts.filter(post => post.id !== postId);
+        const newArrayPosts = posts.filter((post) => post.id !== postId);
         setPosts(newArrayPosts);
     };
 
@@ -52,7 +52,7 @@ const ProviderComponent: React.FC = () => {
 
             let arrayPosts = new Array<Post>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 let item = doc.data() as Post;
                 item.id = doc.id;
 
@@ -85,7 +85,7 @@ const ProviderComponent: React.FC = () => {
 
             const newPosts = new Array<Post>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 let item = doc.data() as Post;
                 item.id = doc.id;
 
@@ -123,7 +123,7 @@ const ProviderComponent: React.FC = () => {
                 {/* Imprimi os posts */}
                 {!loadingPage &&
                     !error &&
-                    posts?.map(post => (
+                    posts?.map((post) => (
                         <PostAdmin
                             data={post}
                             actions={true}
@@ -133,7 +133,7 @@ const ProviderComponent: React.FC = () => {
                     ))}
                 <button
                     type="button"
-                    onClick={event => nextPage(posts[posts.length - 1])}
+                    onClick={() => nextPage(posts[posts.length - 1])}
                     className="btn btn-primary btn-block btn-lg mt-3"
                 >
                     Mais postagens

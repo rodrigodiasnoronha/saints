@@ -4,9 +4,7 @@ import history from '../../services/history';
 import { PostOwner as Profile } from '../../types';
 import { toast } from 'react-toastify';
 import { Form } from '@unform/web';
-import Input from '../../components/Input';
-import TextAreInput from '../../components/TextAreaInput';
-import ProviderPainel from '../../components/ProviderPainel';
+import { Input, TextAreaInput, ProviderPainel } from '../../components';
 import { Wrapper } from './styles';
 
 const avatarPlaceholder =
@@ -153,18 +151,18 @@ const ProfileComponent: React.FC = () => {
                             />
                         </div>
 
-                        <TextAreInput
+                        <TextAreaInput
                             placeholder="Bio..."
                             name="bio"
                             className="form-control"
-                        ></TextAreInput>
+                        ></TextAreaInput>
 
                         <div className="custom-file mt-2 mb-2">
                             <input
                                 type="file"
                                 className="custom-file-input"
                                 id="customFile"
-                                onChange={event =>
+                                onChange={(event) =>
                                     handleSelectAnImage(event.target.files[0])
                                 }
                             />

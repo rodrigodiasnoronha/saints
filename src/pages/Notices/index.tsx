@@ -1,10 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Post } from '../../types';
 import firebase from '../../services/firebase';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Loader from '../../components/Loader';
-import Notice from '../../components/Notice';
+import { Header, Footer, Loader, Notice } from '../../components';
 import { MdSentimentNeutral } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Wrapper } from './styles';
@@ -39,7 +36,7 @@ const NoticesComponent: React.FC = () => {
 
             const arrayPosts = new Array<Post>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 let item = doc.data() as Post;
                 item.id = doc.id;
 
@@ -79,7 +76,7 @@ const NoticesComponent: React.FC = () => {
 
             const arrayNewPosts = new Array<Post>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 let item = doc.data() as Post;
                 item.id = doc.id;
 
@@ -109,7 +106,7 @@ const NoticesComponent: React.FC = () => {
                             <h2>Notícias recentes</h2>
 
                             <div className="latest-grid">
-                                {posts?.map(post => (
+                                {posts?.map((post) => (
                                     <Notice key={post.id} data={post} />
                                 ))}
                             </div>

@@ -2,9 +2,7 @@ import React, { useEffect, useState, memo } from 'react';
 import { useAuth } from '../../contexts/Auth';
 import firebase from '../../services/firebase';
 import { FaKey, FaRegUser } from 'react-icons/fa';
-import Background from '../../components/Background';
-import Header from '../../components/Header';
-import Input from '../../components/Input';
+import { Input, Background, Header } from '../../components';
 import { Form } from './styles';
 
 interface FormHandle {
@@ -83,7 +81,7 @@ const SignInComponent: React.FC = () => {
                             </button>
                             <p
                                 className="forgot-pass"
-                                onClick={(event) => setResetPass(true)}
+                                onClick={() => setResetPass(true)}
                             >
                                 Esqueceu a senha?
                             </p>
@@ -114,7 +112,7 @@ const SignInComponent: React.FC = () => {
                             </button>
                             <p
                                 className="forgot-pass"
-                                onClick={(event) => setResetPass(false)}
+                                onClick={() => setResetPass(false)}
                             >
                                 Já possui conta?
                             </p>

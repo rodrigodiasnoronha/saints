@@ -4,10 +4,7 @@ import history from '../../services/history';
 import { useParams } from 'react-router-dom';
 import { Post, PostOwner } from '../../types';
 import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import Loader from '../../components/Loader';
-import Helmet from '../../components/Helmet';
+import { Footer, Header, Loader, Helmet } from '../../components';
 import DisqusCommentsComponent from '../../components/DisqusComments';
 import { PostWrapper } from './styles';
 import { FiTwitter, FiCalendar as Calendar, FiFacebook } from 'react-icons/fi';
@@ -149,7 +146,7 @@ const PostViewComponent: React.FC = () => {
                                 {post.tags?.map((tagTitle) => (
                                     <span
                                         key={Math.round(Math.random() * 1000)}
-                                        onClick={(event) => {
+                                        onClick={() => {
                                             history.push(`/tags/${tagTitle}`);
                                         }}
                                         className="tag"

@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from '../../services/firebase';
 import { Post } from '../../types';
-// import { FaRegUser as UserIcon } from 'react-icons/fa';
 import { MdCreate as EditIcon, MdDelete as DeleteIcon } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import history from '../../services/history';
@@ -37,7 +36,7 @@ const PostAdminComponent: React.FC<Props> = ({
             <div className="tags"></div>
             <div className="info">
                 <div className="title">
-                    <h4 onClick={event => history.push(`/posts/${data.alias}`)}>
+                    <h4 onClick={() => history.push(`/posts/${data.alias}`)}>
                         {data.title.length > 100
                             ? data.title.substr(0, 100) + '...'
                             : data.title}{' '}
@@ -56,7 +55,7 @@ const PostAdminComponent: React.FC<Props> = ({
                         <div className="actions">
                             <button
                                 type="button"
-                                onClick={event =>
+                                onClick={() =>
                                     history.push(
                                         `/provider/posts/edit/${data.id}`
                                     )
@@ -67,7 +66,7 @@ const PostAdminComponent: React.FC<Props> = ({
                             </button>
 
                             <button
-                                onClick={event => deletePostHandler(data.id)}
+                                onClick={() => deletePostHandler(data.id)}
                                 type="button"
                                 className="btn btn-danger btn-sm mr-2"
                             >

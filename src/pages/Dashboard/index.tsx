@@ -4,10 +4,7 @@ import { Post } from '../../types';
 import AwesomeSlider from 'react-awesome-slider';
 import { MdSentimentNeutral } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import Notice from '../../components/Notice';
-import Loader from '../../components/Loader';
+import { Footer, Notice, Loader, Header } from '../../components';
 import history from '../../services/history';
 import { Content } from './styles';
 import 'react-awesome-slider/dist/styles.css';
@@ -45,7 +42,7 @@ const DashboardComponent: React.FC = () => {
 
             const arrayPosts = new Array<Post>();
 
-            snapshot.docs.forEach(doc => {
+            snapshot.docs.forEach((doc) => {
                 let item = doc.data() as Post;
                 item.id = doc.id;
 
@@ -104,14 +101,14 @@ const DashboardComponent: React.FC = () => {
                                 bullets={false}
                                 animation="openAnimation"
                             >
-                                {fiveLatestsPosts.map(late => (
+                                {fiveLatestsPosts.map((late) => (
                                     <div
                                         key={late.id}
                                         data-src={late.imageUrl}
                                         className="notice-info"
                                     >
                                         <h2
-                                            onClick={event =>
+                                            onClick={() =>
                                                 history.push(
                                                     `/posts/${late.alias}`
                                                 )
@@ -120,7 +117,7 @@ const DashboardComponent: React.FC = () => {
                                             {late.title}
                                         </h2>
                                         <h4
-                                            onClick={event =>
+                                            onClick={() =>
                                                 history.push(
                                                     `/posts/${late.alias}`
                                                 )
@@ -143,7 +140,7 @@ const DashboardComponent: React.FC = () => {
                         <h2>Notícias recentes</h2>
 
                         <div className="latest-grid">
-                            {latestsPosts.map(post => (
+                            {latestsPosts.map((post) => (
                                 <Notice key={post.id} data={post} />
                             ))}
                         </div>
@@ -151,7 +148,7 @@ const DashboardComponent: React.FC = () => {
                             <button
                                 className="btn btn-dark btn-block-sm "
                                 type="button"
-                                onClick={event => history.push('/posts')}
+                                onClick={() => history.push('/posts')}
                             >
                                 Veja mais notícias
                             </button>

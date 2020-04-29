@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React, { useState } from 'react';
 import { useAuth } from '../../../contexts/Auth';
 import { Link } from 'react-router-dom';
@@ -57,7 +58,7 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
 
                         <div
                             className="menu-mobile-clear-menu"
-                            onClick={(event) =>
+                            onClick={() =>
                                 setHiddenMenuMobile(!hiddenMenuMobile)
                             }
                         >
@@ -127,7 +128,7 @@ const MenuMobileComponent: React.FC<Props> = ({ signed }) => {
 
             <button
                 className="menu-mobile-button"
-                onClick={(event) => setHiddenMenuMobile(!hiddenMenuMobile)}
+                onClick={() => setHiddenMenuMobile(!hiddenMenuMobile)}
             >
                 <MenuMobileIcon size={35} />
             </button>

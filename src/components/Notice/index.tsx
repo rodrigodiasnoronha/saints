@@ -23,9 +23,7 @@ const NoticeComponent: React.FC<Props> = ({ data, ...rest }) => {
                 {data?.tags?.length && (
                     <span
                         className="tags"
-                        onClick={event =>
-                            history.push(`/tags/${data?.tags[0]}`)
-                        }
+                        onClick={() => history.push(`/tags/${data!.tags[0]}`)}
                     >
                         {data?.tags[0]}{' '}
                     </span>
@@ -35,19 +33,19 @@ const NoticeComponent: React.FC<Props> = ({ data, ...rest }) => {
                     src={data.imageUrl}
                     alt={data.title}
                     title={data.title}
-                    onClick={event => history.push(`/posts/${data.alias}`)}
+                    onClick={() => history.push(`/posts/${data.alias}`)}
                 />
             </div>
 
             <div className="content-wrapper">
                 <div className="title-wrapper">
-                    <h3 onClick={event => history.push(`/posts/${data.alias}`)}>
+                    <h3 onClick={() => history.push(`/posts/${data.alias}`)}>
                         {data.title}
                     </h3>
                 </div>
 
                 <div className="description-wrapper">
-                    <p onClick={event => history.push(`/posts/${data.alias}`)}>
+                    <p onClick={() => history.push(`/posts/${data.alias}`)}>
                         {data.description.length > 100
                             ? data.description.substr(0, 160) + '...'
                             : data.description}
