@@ -2,8 +2,8 @@ import React from 'react';
 import history from './services/history';
 import { Switch, Route, Router, Redirect } from 'react-router-dom';
 import DashboardComponent from './pages/Dashboard';
-import SignInComponent from './pages/Signin';
 import NotFoundComponent from './pages/NotFound';
+import SignInComponent from './pages/Signin';
 import AboutComponent from './pages/About';
 import ProviderComponent from './pages/Provider';
 import ProviderCreatePost from './pages/ProviderCreatePost';
@@ -20,20 +20,27 @@ const Routes: React.FC = () => (
             <Route path="/signin" exact component={SignInComponent} />
             <Route path="/notfound" exact component={NotFoundComponent} />
             <Route path="/about" exact component={AboutComponent} />
-            <Route path="/provider" exact component={ProviderComponent} />
             <Route path="/profile" exact component={ProfileComponent} />
             <Route path="/search" exact component={SearchComponent} />
             <Route path="/posts" exact component={NoticesComponent} />
             <Route path="/tags" exact component={TagComponent} />
-            <Route path="/tags/:alias" exact component={TagComponent} />
-
-            <Route path="/posts/:alias" exact component={PostViewComponent} />
-
             <Route
                 path="/provider/posts/create"
                 exact
                 component={ProviderCreatePost}
             />
+            <Route path="/provider" exact component={ProviderComponent} />
+            <Route path="/tags/:alias" exact component={TagComponent} />
+
+            <Route path="/posts/:alias" exact component={PostViewComponent} />
+            {/*
+
+            BR empresa
+            Ipanema =>  
+            Real 
+
+
+           */}
             <Route
                 path="/provider/posts/edit/:id"
                 exact
